@@ -1,15 +1,16 @@
-%Q1 example
+clear;
+%1 example
 N = 30;
 bin_seq = randi([0 1],N,1);
 M = 4;
-d = 1;
+d = 2;
 name = "PSK";
 sym_seq = symbol_mapper(bin_seq, M, d, name);
 disp(transpose(bin_seq));
 disp(sym_seq);
 
 
-%Q2
+%2
 N = 10000;
 bin_seq = randi([0 1],N,1);
 M = 4;
@@ -39,13 +40,13 @@ for i = 1:3
     xlabel('I');
     ylabel('Q');
     bin_seq_demap = symbol_demapper(sym_seq, M, d, name);
-    
+
     SER = cal_ser(bin_seq, bin_seq_demap, log2(M));
     disp(SER);
 end
 
 %Q3
-N = 120000;
+N_arr = [2000000 120000 120000 120000;2000000 2000000 120000 120000; 2000000 120000 120000 120000];
 M_arr = [2 4 8 16;2 4 8 16; 4 16 64 256];
 iter_arr = [4 4 3];
 name_arr = ["PAM", "PSK", "QAM"];
@@ -56,6 +57,7 @@ for k = 1:3
         ratio = 10 .^ (dB./10);
         name = name_arr(k);
         for i = 1:11
+            N = N_arr(k,j);
             M = M_arr(k,j);
             symbol_length = N / log2(M);
             bin_seq = randi([0 1],N,1);
