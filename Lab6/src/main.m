@@ -1,19 +1,19 @@
-%1 example
+%Q1 example
 N = 30;
 bin_seq = randi([0 1],N,1);
 M = 4;
-d = 2;
+d = 1;
 name = "PSK";
 sym_seq = symbol_mapper(bin_seq, M, d, name);
 disp(transpose(bin_seq));
 disp(sym_seq);
 
 
-%2
+%Q2
 N = 10000;
 bin_seq = randi([0 1],N,1);
 M = 4;
-d = 2;
+d = 1;
 name = "QAM";
 sym_seq = symbol_mapper(bin_seq, M, d, name);
 histogram2(real(sym_seq),imag(sym_seq), [100 100], "FaceColor", "flat");
@@ -163,3 +163,4 @@ for i = 1:11
     BER_hard = cal_ser(random_seq, decoded_data, 1);
     disp(BER_hard);
     BER_hard_arr = [BER_hard_arr BER_hard];
+end
